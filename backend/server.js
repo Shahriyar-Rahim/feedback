@@ -16,12 +16,11 @@ connectDB();
 
 const app = express();
 
-// Trust proxy so req.headers['x-forwarded-for'] is accurate behind Render/other PaaS
 app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
@@ -33,6 +32,14 @@ app.use("/api", apiLimiter);
 
 app.get("/api/health", (req, res) => res.json({ success: true, status: "ok" }));
 
+app.get("/api", (req, res) => {
+  res.json({
+    status: "healthy",
+    message: "CR Feedback System API is running successfully",
+    timestamp: new Date()
+  });
+});
+
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/admin", adminRoutes);
 
@@ -41,7 +48,3 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
