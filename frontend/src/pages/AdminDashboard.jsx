@@ -93,6 +93,11 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleGoHome = async (e) => {
+    e.preventDefault();
+    navigate("/");
+  }
+
   return (
     <div className="min-h-screen bg-paper">
       <header className="bg-plum-900 text-paper px-6 py-4 flex items-center justify-between">
@@ -100,9 +105,38 @@ const AdminDashboard = () => {
           <h1 className="font-display text-xl">CR Admin Dashboard</h1>
           <p className="text-xs text-paper/60">CSE 21st Batch, Section B</p>
         </div>
-        <button onClick={handleLogout} className="btn btn-sm btn-outline border-paper/30 text-paper hover:bg-paper hover:text-plum-900 rounded-full">
-          Logout
-        </button>
+        
+        {/* Right side controls grouped together smoothly */}
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={handleGoHome}
+            className="p-2 hover:bg-paper/10 rounded-xl transition-colors duration-200 text-paper/80 hover:text-paper"
+            title="Go to Home"
+            aria-label="Home"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+              />
+            </svg>
+          </button>
+          
+          <button 
+            onClick={handleLogout} 
+            className="btn btn-sm bg-transparent border border-paper/20 text-paper hover:bg-paper hover:text-plum-900 rounded-full px-4 py-1.5 text-xs font-medium transition-all duration-200"
+          >
+            Logout
+          </button>
+        </div>
       </header>
 
       <nav className="border-b border-plum-100 bg-base-100 px-6">
@@ -233,7 +267,7 @@ const AdminDashboard = () => {
 
             {tab === "Feedback" && (
               <div>
-                <div className="flex gap-2 mb-6">
+                <div className="flex gap-2 flex-wrap sm:flex-cols mb-6">
                   {[
                     { value: "", label: "All" },
                     { value: "cr1", label: settingsForm?.cr1Name || "CR 1" },
