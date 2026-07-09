@@ -39,7 +39,7 @@ A sophisticated full-stack feedback collection application designed for CSE 21st
 
 ### Screenshot
 
-![Feedback System Interface](./docs/screenshot.png)
+![Feedback System Interface](./screenshot.png)
 > *Add a screenshot of your website here. Replace `./docs/screenshot.png` with the actual path to your screenshot*
 
 ---
